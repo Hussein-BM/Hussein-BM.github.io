@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="صفحة شخصية عربية بتصميم عصري ومحتوى منظم" />
+  <meta name="keywords" content="حسين عشتار, صفحة شخصية, خواطر, محتوى تقني" />
+  <meta name="theme-color" content="#07101d" />
+  <title>حسين عشتار</title>
+
+  <style>
+    :root{
+      --bg1:#07101d;
+      --bg2:#101c34;
+      --card:rgba(255,255,255,.07);
+      --card2:rgba(255,255,255,.04);
+      --line:rgba(255,255,255,.12);
+      --text:#f5f7fb;
+      --muted:#b6bfd4;
+      --accent:#7c5cff;
+      --accent2:#00d4ff;
+      --accent3:#ff4da6;
+      --shadow:0 14px 34px rgba(0,0,0,.26);
+      --radius:24px;
+    }
+
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      min-height:100vh;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(124,92,255,.24), transparent 22%),
+        radial-gradient(circle at 85% 15%, rgba(0,212,255,.18), transparent 20%),
+        radial-gradient(circle at 70% 80%, rgba(255,77,166,.16), transparent 24%),
+        linear-gradient(135deg, var(--bg1), var(--bg2));
+      overflow-x:hidden;
+    }
+
+    a{ color:inherit; }
+
+    /* إزالة مربع اللمس الشفاف الافتراضي */
+    a, button, .card, .contact-item, .btn, .scroll-hint, .secondary-btn, .sound-btn, .floating, .nav a{
+      -webkit-tap-highlight-color: transparent;
+      outline: none;
+      user-select: none;
+    }
+
+    .wrap{
+      width:min(1180px, calc(100% - 28px));
+      margin:0 auto;
+      padding:18px 0 32px;
+    }
+
+    .topbar{
+      position:sticky;
+      top:12px;
+      z-index:40;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      padding:14px 18px;
+      margin-bottom:18px;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:rgba(10,15,28,.72);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+    }
+
+    .mark{
+      width:44px;
+      height:44px;
+      border-radius:50%;
+      padding:2px;
+      background: linear-gradient(270deg, #7c5cff, #00d4ff, #ff4da6, #7c5cff);
+      background-size: 600% 600%;
+      animation: borderMove 6s linear infinite;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow: 0 0 15px rgba(124,92,255,.5);
+      flex:0 0 auto;
+    }
+
+    .mark img{
+      width:100%;
+      height:100%;
+      border-radius:50%;
+      object-fit:cover;
+      display:block;
+    }
+
+    .brand-name{
+      font-size:20px;
+      line-height:1.2;
+      background: linear-gradient(135deg, #ffffff, #cfd8ff 45%, #8be9ff);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      font-weight:800;
+      white-space:nowrap;
+    }
+
+    .nav{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+
+    .nav a{
+      text-decoration:none;
+      color:#edf2ff;
+      font-size:13px;
+      padding:9px 12px;
+      border-radius:999px;
+      border:1px solid transparent;
+      transition:.25s ease;
+      white-space:nowrap;
+    }
+
+    .nav a:hover{
+      border-color: rgba(0,212,255,.35);
+      background: rgba(255,255,255,.05);
+      transform: translateY(-1px);
+    }
+
+    .sound-btn{
+      border:1px solid var(--line);
+      background:linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      color:var(--text);
+      width:46px;
+      height:46px;
+      border-radius:16px;
+      cursor:pointer;
+      transition:.25s ease;
+      box-shadow: 0 10px 25px rgba(0,0,0,.18);
+      flex:0 0 auto;
+    }
+
+    .sound-btn:hover{
+      transform:translateY(-2px) scale(1.02);
+      border-color: rgba(124,92,255,.45);
+    }
+
+    .hero{
+      min-height: calc(100vh - 98px);
+      display:grid;
+      place-items:center;
+      padding:28px 0 14px;
+    }
+
+    .hero-card,
+    .section{
+      width:100%;
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    .hero-card{
+      padding: clamp(22px, 4vw, 44px);
+      position:relative;
+    }
+
+    .hero-card::after{
+      content:"";
+      position:absolute;
+      inset:auto -10% -55% auto;
+      width:320px;
+      height:320px;
+      border-radius:50%;
+      background: radial-gradient(circle, rgba(0,212,255,.22), transparent 62%);
+      filter: blur(12px);
+      pointer-events:none;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 14px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
+      color:#d7ddf0;
+      font-size:13px;
+      margin-bottom:18px;
+    }
+
+    .title{
+      font-size: clamp(30px, 5vw, 58px);
+      line-height:1.08;
+      letter-spacing:-.02em;
+      margin-bottom:14px;
+    }
+
+    .title span{
+      background: linear-gradient(135deg, #fff, #cfd8ff 45%, #8be9ff);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+
+    .lead{
+      max-width: 760px;
+      font-size: clamp(16px, 2vw, 20px);
+      line-height:1.95;
+      color:var(--muted);
+    }
+
+    .hero-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:24px;
+    }
+
+    .scroll-hint,
+    .secondary-btn,
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      text-decoration:none;
+      border-radius:14px;
+      transition:.25s ease;
+      font-weight:700;
+    }
+
+    .scroll-hint{
+      color:#e9edff;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.05);
+      padding:12px 16px;
+      border-radius:999px;
+    }
+
+    .secondary-btn{
+      padding:12px 16px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+    }
+
+    .scroll-hint:hover,
+    .secondary-btn:hover,
+    .btn:hover{
+      transform:translateY(-2px);
+    }
+
+    .section{
+      margin-top:18px;
+    }
+
+    section{
+      scroll-margin-top: 130px;
+    }
+
+    .section-inner{
+      padding: clamp(22px, 3vw, 32px);
+    }
+
+    .section-head{
+      display:flex;
+      align-items:center;
+      gap:16px;
+      margin-bottom:18px;
+    }
+
+    .section-head h2{
+      font-size: clamp(22px, 3vw, 30px);
+      line-height:1.2;
+      white-space:nowrap;
+    }
+
+    .section-head .line{
+      flex:1;
+      height:1px;
+      background: linear-gradient(90deg, rgba(124,92,255,.6), rgba(0,212,255,.18), transparent);
+    }
+
+    .about-grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:18px;
+      align-items:stretch;
+    }
+
+    .about-box,
+    .info-box,
+    .quote-box,
+    .card,
+    .contact-item,
+    .stat{
+      border:1px solid rgba(255,255,255,.11);
+      background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.03));
+      border-radius: 22px;
+      box-shadow: 0 10px 24px rgba(0,0,0,.18);
+    }
+
+    .about-box,
+    .info-box{
+      padding:22px;
+    }
+
+    .about-box h3,
+    .info-box h3,
+    .card h3,
+    .contact-item h3{
+      font-size:22px;
+      margin-bottom:12px;
+    }
+
+    .about-box p,
+    .info-box p,
+    .quote-box p,
+    .card p,
+    .contact-item p{
+      color:var(--muted);
+      line-height:1.9;
+    }
+
+    .quote-box{
+      padding:22px;
+    }
+
+    .quote-box p{
+      font-size: clamp(18px, 2.2vw, 24px);
+    }
+
+    .quote-box small{
+      display:block;
+      margin-top:10px;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .channels{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap:18px;
+    }
+
+    .card{
+      position:relative;
+      padding:22px;
+      min-height: 240px;
+      overflow:hidden;
+      transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease, opacity .45s ease;
+      opacity:0;
+      transform: translateY(18px);
+    }
+
+    @keyframes borderMove{
+      0%{ background-position:0% 50%; }
+      50%{ background-position:100% 50%; }
+      100%{ background-position:0% 50%; }
+    }
+
+    .card::before{
+      content:"";
+      position:absolute;
+      top:0;
+      left:-100%;
+      width:100%;
+      height:100%;
+      background:linear-gradient(120deg, transparent, rgba(255,255,255,.2), transparent);
+      transition:.6s;
+      pointer-events:none;
+    }
+
+    .card:hover::before{
+      left:100%;
+    }
+
+    .card.in{
+      opacity:1;
+      transform: translateY(0);
+    }
+
+    .card:hover{
+      transform: translateY(-4px) scale(1.01);
+      border-color: rgba(124,92,255,.45);
+      box-shadow: 0 18px 40px rgba(0,0,0,.26);
+    }
+
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.07);
+      border:1px solid rgba(255,255,255,.11);
+      color:#eaf0ff;
+      font-size:12px;
+      margin-bottom:14px;
+    }
+
+    .card p{
+      min-height: 88px;
+    }
+
+    .btn{
+      padding:12px 16px;
+      color:white;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      margin-top:16px;
+      box-shadow: 0 12px 25px rgba(124,92,255,.22);
+    }
+
+    .gallery{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap:16px;
+    }
+
+    .gallery figure{
+      position:relative;
+      margin:0;
+    }
+
+    .gallery img{
+      width:100%;
+      height:220px;
+      object-fit:cover;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow: 0 12px 28px rgba(0,0,0,.22);
+      transition: transform .25s ease, filter .25s ease, box-shadow .25s ease;
+      cursor:pointer;
+      display:block;
+    }
+
+    .gallery img:hover{
+      transform: translateY(-3px) scale(1.03);
+      filter: brightness(1.05);
+      box-shadow: 0 18px 38px rgba(0,0,0,.3);
+    }
+
+    .gallery figcaption{
+      margin-top:8px;
+      color:var(--muted);
+      font-size:12px;
+      text-align:center;
+    }
+
+    .contact-grid{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap:16px;
+    }
+
+    .contact-item{
+      padding:20px;
+      text-decoration:none;
+      transition:.25s ease;
+    }
+
+    .contact-item:hover{
+      transform: translateY(-4px);
+      border-color: rgba(0,212,255,.35);
+    }
+
+    .contact-item .icon{
+      display:inline-grid;
+      place-items:center;
+      width:44px;
+      height:44px;
+      border-radius:14px;
+      background:linear-gradient(135deg, rgba(124,92,255,.85), rgba(0,212,255,.7));
+      margin-bottom:12px;
+      box-shadow: 0 10px 22px rgba(0,0,0,.2);
+    }
+
+    .footer{
+      text-align:center;
+      padding:16px 10px 4px;
+      color:rgba(255,255,255,.45);
+      font-size:12px;
+    }
+
+    .floating{
+      position:fixed;
+      inset:auto 18px 18px auto;
+      width:54px;
+      height:54px;
+      border-radius:18px;
+      border:1px solid var(--line);
+      background: linear-gradient(135deg, rgba(124,92,255,.95), rgba(0,212,255,.78));
+      color:white;
+      display:grid;
+      place-items:center;
+      box-shadow: 0 18px 35px rgba(0,0,0,.3);
+      cursor:pointer;
+      z-index:30;
+      transition:.25s ease;
+      text-decoration:none;
+    }
+
+    .floating:hover{
+      transform:translateY(-3px);
+    }
+
+    .lightbox{
+      position:fixed;
+      inset:0;
+      background: rgba(3, 8, 16, .84);
+      backdrop-filter: blur(8px);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      z-index:60;
+    }
+
+    .lightbox.show{
+      display:flex;
+    }
+
+    .lightbox-content{
+      width:min(100%, 980px);
+      background: rgba(12,18,32,.92);
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:24px;
+      padding:12px;
+      box-shadow: 0 30px 80px rgba(0,0,0,.45);
+    }
+
+    .lightbox-content img{
+      width:100%;
+      max-height:78vh;
+      object-fit:contain;
+      border-radius:18px;
+      display:block;
+      background:#060b13;
+    }
+
+    .lightbox-bar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      padding:10px 8px 12px;
+      color:#dfe6ff;
+      font-size:14px;
+    }
+
+    .close-btn{
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(255,255,255,.06);
+      color:#fff;
+      width:40px;
+      height:40px;
+      border-radius:12px;
+      cursor:pointer;
+      font-size:18px;
+    }
+
+    /* تفاعل أوضح عند الضغط */
+    .btn:active,
+    .scroll-hint:active,
+    .secondary-btn:active,
+    .sound-btn:active,
+    .floating:active,
+    .nav a:active,
+    .contact-item:active,
+    .card:active{
+      transform: translateY(1px) scale(0.98);
+      opacity: 1;
+      background-color: rgba(255,255,255,.12);
+      box-shadow: 0 6px 14px rgba(0,0,0,.18);
+    }
+
+    /* تركيز واضح بدل الشفافية */
+    .btn:focus-visible,
+    .scroll-hint:focus-visible,
+    .secondary-btn:focus-visible,
+    .sound-btn:focus-visible,
+    .floating:focus-visible,
+    .nav a:focus-visible,
+    .contact-item:focus-visible{
+      outline: 2px solid rgba(0,212,255,.75);
+      outline-offset: 3px;
+    }
+
+    /* انتقالات أخف */
+    .btn,
+    .scroll-hint,
+    .secondary-btn,
+    .sound-btn,
+    .floating,
+    .nav a,
+    .contact-item{
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease, opacity .18s ease;
+    }
+
+    @media (max-width: 980px){
+      .about-grid,
+      .contact-grid{
+        grid-template-columns:1fr;
+      }
+
+      .channels{
+        grid-template-columns:1fr;
+      }
+
+      .topbar{
+        flex-wrap:wrap;
+      }
+
+      .nav{
+        order:3;
+        width:100%;
+        justify-content:flex-start;
+      }
+    }
+
+    @media (max-width: 520px){
+      .topbar{
+        padding:12px 14px;
+        border-radius:16px;
+      }
+
+      .brand-name{
+        font-size:16px;
+      }
+
+      .hero{
+        min-height:auto;
+        padding-top:10px;
+      }
+
+      .hero-card,
+      .section-inner{
+        padding:18px;
+        border-radius:20px;
+      }
+
+      .title{
+        font-size:28px;
+      }
+
+      .lead{
+        font-size:15px;
+      }
+
+      .card{
+        min-height:auto;
+      }
+
+      .section-head h2{
+        white-space:normal;
+      }
+
+      .gallery img{
+        height:180px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      *{
+        scroll-behavior:auto !important;
+        animation:none !important;
+        transition:none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap" id="top">
+    <header class="topbar">
+      <div class="brand">
+        <div class="mark">
+          <img src="me.jpg" alt="صورتي">
+        </div>
+        <div>
+          <h1 class="brand-name">حسين عشتار</h1>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="التنقل الرئيسي">
+        <a href="#start">الرئيسية</a>
+        <a href="#about">عن الصفحة</a>
+        <a href="#channels">القنوات</a>
+        <a href="#gallery">الصور</a>
+        <a href="#contact">تواصل</a>
+      </nav>
+
+      <button class="sound-btn" id="soundBtn" type="button" aria-label="تشغيل الصوت" aria-pressed="false">🔇</button>
+    </header>
+
+    <main>
+      <section class="hero" id="start">
+        <div class="hero-card reveal">
+          <div class="badge">بداية الصفحة</div>
+          <div class="title"><span>الحياة</span> مو مجرد أيام نعيشها</div>
+          <p class="lead">
+            الحياة هي اللحظات اللي نصنعها، والتعب اللي يعلّمنا، والسقوط اللي يرجّعنا أقوى.
+            كل يوم فرصة جديدة حتى نرتب أفكارنا، ونمشي بخطوة أوضح، ونوصل.
+          </p>
+          <div class="hero-actions">
+            <a class="scroll-hint" href="#about">ابدأ من هنا ↓</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section reveal" id="about">
+        <div class="section-inner">
+          <div class="section-head">
+            <h2>عن الصفحة</h2>
+            <div class="line"></div>
+          </div>
+
+          <div class="about-grid">
+            <div class="about-box">
+              <h3>نبذة مختصرة</h3>
+              <p>
+                أنا حسين أحب أشارك أفكاري وتجربتي بالحياة، سواء كانت خواطر أو محتوى تقني بسيط.
+                هدفي أوصل فكرة واضحة وأترك أثر عند كل شخص يزور صفحتي.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section reveal" id="message">
+        <div class="section-inner">
+          <div class="section-head">
+            <h2>ماذا أريد أن أقول</h2>
+            <div class="line"></div>
+          </div>
+          <div class="quote-box">
+            <p>في المنعطف الحاد عزرائيل ينتظر</p>
+            <small>حسين عشتار</small>
+          </div>
+        </div>
+      </section>
+
+      <section class="section reveal" id="channels">
+        <div class="section-inner">
+          <div class="section-head">
+            <h2>القنوات</h2>
+            <div class="line"></div>
+          </div>
+
+          <div class="channels">
+            <article class="card reveal">
+              <div class="tag">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="#00d4ff" aria-hidden="true">
+                  <path d="M9.04 15.47l-.39 5.52c.56 0 .8-.24 1.09-.52l2.62-2.5 5.43 3.97c.99.55 1.7.26 1.96-.92l3.55-16.65c.33-1.54-.56-2.14-1.52-1.78L1.52 9.5c-1.47.57-1.45 1.39-.25 1.76l5.67 1.77L19.74 5.6c.6-.4 1.15-.18.7.22"/>
+                </svg>
+                تليغرام
+              </div>
+              <h3>العشاء الأخير</h3>
+              <p>
+                اكتب هنا فكرة القناة الأولى. مثال: شروحات تقنية، أفكار مفيدة، وأشياء مرتبة
+                تفيد المتابعين بشكل يومي.
+              </p>
+              <a href="https://t.me/fftffl" class="btn" target="_blank" rel="noopener noreferrer">دخول القناة</a>
+            </article>
+
+            <article class="card reveal">
+              <div class="tag">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="#00d4ff" aria-hidden="true">
+                  <path d="M9.04 15.47l-.39 5.52c.56 0 .8-.24 1.09-.52l2.62-2.5 5.43 3.97c.99.55 1.7.26 1.96-.92l3.55-16.65c.33-1.54-.56-2.14-1.52-1.78L1.52 9.5c-1.47.57-1.45 1.39-.25 1.76l5.67 1.77L19.74 5.6c.6-.4 1.15-.18.7.22"/>
+                </svg>
+                تليغرام
+              </div>
+              <h3>PS4_the world</h3>
+              <p>
+                قناة خاصة بكل ما يتعلق بـ PS4 المعدل 🎮 نقدم أحدث مودات GTA شروحات تفصيلية
+                وأفكار جديدة تخليك تستمتع بتجربة لعب مختلفة تمامًا.
+                تابعنا حتى تحصل على أفضل الإضافات والتحديثات أول بأول 🔥
+              </p>
+              <a href="https://t.me/GUioooojhg" class="btn" target="_blank" rel="noopener noreferrer">دخول القناة</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section reveal" id="gallery">
+        <div class="section-inner">
+          <div class="section-head">
+            <h2>الصور</h2>
+            <div class="line"></div>
+          </div>
+
+          <div class="gallery">
+            <figure>
+              <img src="1.jpg" alt="صورة 1" loading="lazy">
+              <figcaption>صورة 1</figcaption>
+            </figure>
+            <figure>
+              <img src="2.jpg" alt="صورة 2" loading="lazy">
+              <figcaption>صورة 2</figcaption>
+            </figure>
+            <figure>
+              <img src="3.jpg" alt="صورة 3" loading="lazy">
+              <figcaption>صورة 3</figcaption>
+            </figure>
+            <figure>
+              <img src="4.jpg" alt="صورة 4" loading="lazy">
+              <figcaption>صورة 4</figcaption>
+            </figure>
+            <figure>
+              <img src="5.jpg" alt="صورة 5" loading="lazy">
+              <figcaption>صورة 5</figcaption>
+            </figure>
+            <figure>
+              <img src="6.jpg" alt="صورة 6" loading="lazy">
+              <figcaption>صورة 6</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="section reveal" id="contact">
+        <div class="section-inner">
+          <div class="section-head">
+            <h2>تواصل</h2>
+            <div class="line"></div>
+          </div>
+
+          <div class="contact-grid">
+<a class="contact-item" href="https://t.me/i444iy" target="_blank" rel="noopener noreferrer">
+  <div class="icon">✈</div>
+  <h3>تليغرام</h3>
+  <p>@i444iy</p>
+  <span class="btn">تواصل</span>
+</a>
+
+            <a class="contact-item" href="#" aria-label="إنستغرام">
+              <div class="icon">⌁</div>
+              <h3>إنستغرام</h3>
+              <p>مكان مناسب حتى تعرض حسابك الرسمي.</p>
+            </a>
+
+            <a class="contact-item" href="#" aria-label="البريد الإلكتروني">
+              <div class="icon">✉</div>
+              <h3>البريد</h3>
+              <p>حسابك أو قنات</p>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <div class="footer">© حسين عشتار</div>
+    </main>
+  </div>
+
+  <audio id="audio" loop preload="none">
+    <source src="sound.mp3" type="audio/mpeg">
+  </audio>
+
+  <a class="floating" href="#top" title="أعلى الصفحة" aria-label="أعلى الصفحة">↑</a>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lightbox-content">
+      <div class="lightbox-bar">
+        <div id="lightboxTitle">صورة</div>
+        <button class="close-btn" id="closeLightbox" type="button" aria-label="إغلاق">×</button>
+      </div>
+      <img id="lightboxImg" src="" alt="صورة مكبرة">
+    </div>
+  </div>
+
+  <script>
+    const audio = document.getElementById("audio");
+    const soundBtn = document.getElementById("soundBtn");
+
+    function updateSoundIcon() {
+      const isPaused = audio.paused;
+      soundBtn.textContent = isPaused ? "🔇" : "🔊";
+      soundBtn.setAttribute("aria-label", isPaused ? "تشغيل الصوت" : "إيقاف الصوت");
+      soundBtn.setAttribute("aria-pressed", String(!isPaused));
+    }
+
+    soundBtn.addEventListener("click", async () => {
+      try {
+        if (audio.paused) {
+          await audio.play();
+        } else {
+          audio.pause();
+        }
+      } catch (e) {
+        console.warn("Audio playback failed:", e);
+      }
+      updateSoundIcon();
+    });
+
+    updateSoundIcon();
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: "0px 0px -40px 0px"
+    });
+
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightboxImg");
+    const lightboxTitle = document.getElementById("lightboxTitle");
+    const closeLightbox = document.getElementById("closeLightbox");
+
+    document.querySelectorAll(".gallery img").forEach((img) => {
+      img.addEventListener("click", () => {
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightboxTitle.textContent = img.alt;
+        lightbox.classList.add("show");
+        lightbox.setAttribute("aria-hidden", "false");
+      });
+    });
+
+    function hideLightbox() {
+      lightbox.classList.remove("show");
+      lightbox.setAttribute("aria-hidden", "true");
+      lightboxImg.src = "";
+    }
+
+    closeLightbox.addEventListener("click", hideLightbox);
+
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox) hideLightbox();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") hideLightbox();
+    });
+  </script>
+</body>
+</html>
